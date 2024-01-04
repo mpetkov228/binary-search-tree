@@ -89,6 +89,20 @@ class Tree {
             return node;
         }   
     }
+
+    find(value, node = this.root) {
+        if (node == null) {
+            return null;
+        }
+
+        if (node.data > value) {
+            return this.find(value, node.left);
+        } else if (node.data < value) {
+            return this.find(value, node.right);
+        }
+
+        return node;
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
@@ -107,8 +121,7 @@ function prettyPrint(node, prefix = "", isLeft = true) {
     }
 }
 
-let tree = new Tree([1, 2, 3, 7, 9, 11, 15, 13]);
+let tree = new Tree([1, 2, 3, 7, 9, 11, 13, 15]);
 
 prettyPrint(tree.root);
-tree.delete(7);
-prettyPrint(tree.root);
+console.log(tree.find(13));
