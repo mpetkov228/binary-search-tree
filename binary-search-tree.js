@@ -129,6 +129,27 @@ class Tree {
 
         return this.root;
     }
+
+    preOrder(cb, arr = [], node = this.root) {
+        if (node == null) {
+            return;
+        }
+
+        if (!cb) {
+            arr.push(node.data);
+        } else {
+            cb(node);
+        }
+
+        this.preOrder(cb, arr, node.left);
+        this.preOrder(cb, arr, node.right);
+
+        return arr;
+    }
+
+    inOrder(cb, arr = [], node = this.root) {
+        
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
@@ -151,10 +172,19 @@ let tree = new Tree([1, 2, 3, 7, 9, 11, 13, 15]);
 
 prettyPrint(tree.root);
 console.log(tree.levelOrder());
+console.log(tree.preOrder());
+
+
+
+
+
+
+
+
+
 
 function add1(node) {
     node.data += 1;
 }
 
-tree.levelOrder(add1);
-prettyPrint(tree.root);
+
