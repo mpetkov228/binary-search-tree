@@ -13,7 +13,6 @@ class Tree {
     }
 
     buildTree(data, start = 0, end = data.length - 1) {
-
         if (start > end) {
             return null;
         }
@@ -26,8 +25,59 @@ class Tree {
         
         return node;
     }
+
+    insert(value, node = this.root) {
+        if (node == null) {
+            node = new Node(value);
+            return node;
+        }
+
+        if (node.data > value) {
+            node.left = this.insert(value, node.left);
+        } else if (node.data < value) {
+            node.right = this.insert(value, node.right);
+        }
+
+        return node;
+    }
+
 }
 
-let tree = new Tree([1, 2, 3, 4]);
+let tree = new Tree([1, 3, 7, 9]);
 
 console.log(tree.root);
+
+prettyPrint(tree.root);
+
+tree.insert(2);
+
+prettyPrint(tree.root);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function prettyPrint(node, prefix = "", isLeft = true) {
+    if (node == null) {
+        return;
+    }
+
+    if (node.right != null) {
+        prettyPrint(node.right, `${prefix}${isLeft ? "|   " : "    "}`, false);
+    }
+
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+
+    if (node.left != null) {
+        prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+    }
+}
