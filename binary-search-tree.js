@@ -103,6 +103,32 @@ class Tree {
 
         return node;
     }
+
+    levelOrder(cb) {
+        let array = [];
+        let q = [this.root];
+
+        while (q.length != 0) {
+            let node = q.shift();
+            if (node == null) {
+                continue;
+            }
+            q.push(node.left);
+            q.push(node.right);
+
+            if (cb) {
+                cb(node);
+            } else {
+                array.push(node.data);
+            }
+        }
+
+        if (!cb) {
+            return array;
+        }
+
+        return this.root;
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
@@ -124,4 +150,11 @@ function prettyPrint(node, prefix = "", isLeft = true) {
 let tree = new Tree([1, 2, 3, 7, 9, 11, 13, 15]);
 
 prettyPrint(tree.root);
-console.log(tree.find(13));
+console.log(tree.levelOrder());
+
+function add1(node) {
+    node.data += 1;
+}
+
+tree.levelOrder(add1);
+prettyPrint(tree.root);
