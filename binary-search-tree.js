@@ -148,7 +148,21 @@ class Tree {
     }
 
     inOrder(cb, arr = [], node = this.root) {
-        
+        if (node == null) {
+            return;
+        }
+
+        this.inOrder(cb, arr, node.left);
+
+        if (!cb) {
+            arr.push(node.data);
+        } else {
+            cb(node);
+        }
+
+        this.inOrder(cb, arr, node.right);
+
+        return arr;
     }
 }
 
@@ -173,6 +187,7 @@ let tree = new Tree([1, 2, 3, 7, 9, 11, 13, 15]);
 prettyPrint(tree.root);
 console.log(tree.levelOrder());
 console.log(tree.preOrder());
+console.log(tree.inOrder());
 
 
 
