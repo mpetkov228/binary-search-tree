@@ -41,15 +41,65 @@ class Tree {
         return node;
     }
 
+    delete(value, node = this.root) {
+        // base case
+        if (node == null) {
+            return node;
+        }
+
+        // tree traversal
+        if (node.data > value) {
+            node.left = this.delete(value, node.left);
+            return node;
+        } else if (node.data < value) {
+            node.right = this.delete(value, node.right);
+            return node;
+        }
+
+
+        if (node.left == null) {
+            // if node has only right child
+            let temp = node.right;
+            node = null;
+            return temp;
+        } else if (node.right == null) {
+            // if node has only left child
+            let temp = node.left;
+            node = null;
+            return temp;
+        } else {
+            // if node has two children
+            let successorParent = node;
+
+            let successor = node.right;
+            while (successor.left != null) {
+                successorParent = successor;
+                successor = successor.left;
+            }
+
+            if (successorParent !== node) {
+                successorParent.left = successor.right;
+            } else {
+                successorParent.right = successor.right;
+            }
+
+            node.data = successor.data;
+
+            successor = null;
+            return node;
+        }   
+
+    }
+
 }
 
-let tree = new Tree([1, 3, 7, 9]);
+let tree = new Tree([1, 2, 3, 7, 9, 11, 15, 13]);
 
 console.log(tree.root);
 
 prettyPrint(tree.root);
 
-tree.insert(2);
+tree.delete(7);
 
 prettyPrint(tree.root);
 
