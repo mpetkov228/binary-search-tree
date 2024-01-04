@@ -164,6 +164,23 @@ class Tree {
 
         return arr;
     }
+
+    postOrder(cb, arr = [], node = this.root) {
+        if (node == null) {
+            return;
+        }
+
+        this.postOrder(cb, arr, node.left);
+        this.postOrder(cb, arr, node.right);
+
+        if (!cb) {
+            arr.push(node.data);
+        } else {
+            cb(node);
+        }
+
+        return arr;
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
@@ -188,18 +205,4 @@ prettyPrint(tree.root);
 console.log(tree.levelOrder());
 console.log(tree.preOrder());
 console.log(tree.inOrder());
-
-
-
-
-
-
-
-
-
-
-function add1(node) {
-    node.data += 1;
-}
-
-
+console.log(tree.postOrder());
