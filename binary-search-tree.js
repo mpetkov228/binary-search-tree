@@ -88,33 +88,8 @@ class Tree {
             successor = null;
             return node;
         }   
-
     }
-
 }
-
-let tree = new Tree([1, 2, 3, 7, 9, 11, 15, 13]);
-
-console.log(tree.root);
-
-prettyPrint(tree.root);
-
-tree.delete(7);
-
-prettyPrint(tree.root);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function prettyPrint(node, prefix = "", isLeft = true) {
     if (node == null) {
@@ -131,3 +106,9 @@ function prettyPrint(node, prefix = "", isLeft = true) {
         prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
 }
+
+let tree = new Tree([1, 2, 3, 7, 9, 11, 15, 13]);
+
+prettyPrint(tree.root);
+tree.delete(7);
+prettyPrint(tree.root);
