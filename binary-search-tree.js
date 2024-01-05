@@ -208,6 +208,13 @@ class Tree {
         
         return 0;
     }
+
+    isBalanced() {
+        let leftHeight = this.height(this.root.left);
+        let rightHeight = this.height(this.root.right);
+
+        return Math.abs(leftHeight - rightHeight) <= 1;
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
@@ -229,8 +236,4 @@ function prettyPrint(node, prefix = "", isLeft = true) {
 let tree = new Tree([1, 2, 3, 7, 9, 11, 13, 15]);
 
 prettyPrint(tree.root);
-console.log(tree.levelOrder());
-console.log(tree.preOrder());
-console.log(tree.inOrder());
-console.log(tree.postOrder());
-console.log(tree.depth(tree.root.left.left));
+console.log(tree.isBalanced());
