@@ -181,6 +181,20 @@ class Tree {
 
         return arr;
     }
+
+    height(node) {
+        if (node == null) {
+            return 0;
+        }
+        if (!node.left && !node.right) {
+            return 0;
+        }
+
+        let leftHeight = this.height(node.left);
+        let rightHeight = this.height(node.right);
+
+       return Math.max(leftHeight, rightHeight) + 1;
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
@@ -206,3 +220,4 @@ console.log(tree.levelOrder());
 console.log(tree.preOrder());
 console.log(tree.inOrder());
 console.log(tree.postOrder());
+console.log(tree.height(tree.root.right.left));
