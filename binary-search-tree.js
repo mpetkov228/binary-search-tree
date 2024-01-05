@@ -215,6 +215,11 @@ class Tree {
 
         return Math.abs(leftHeight - rightHeight) <= 1;
     }
+
+    rebalance() {
+        let sortedArray = this.inOrder();
+        this.root = this.buildTree(sortedArray);
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
@@ -235,5 +240,11 @@ function prettyPrint(node, prefix = "", isLeft = true) {
 
 let tree = new Tree([1, 2, 3, 7, 9, 11, 13, 15]);
 
+prettyPrint(tree.root);
+console.log(tree.isBalanced());
+tree.insert(16);
+prettyPrint(tree.root);
+console.log(tree.isBalanced());
+tree.rebalance();
 prettyPrint(tree.root);
 console.log(tree.isBalanced());
