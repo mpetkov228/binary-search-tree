@@ -195,6 +195,19 @@ class Tree {
 
        return Math.max(leftHeight, rightHeight) + 1;
     }
+
+    depth(node, tree = this.root) {
+        
+        if (node.data < tree.data) {
+            return 1 + this.depth(node, tree.left);
+        }
+        
+        if (node.data > tree.data) {
+            return 1 + this.depth(node, tree.right);
+        }
+        
+        return 0;
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
@@ -220,4 +233,4 @@ console.log(tree.levelOrder());
 console.log(tree.preOrder());
 console.log(tree.inOrder());
 console.log(tree.postOrder());
-console.log(tree.height(tree.root.right.left));
+console.log(tree.depth(tree.root.left.left));
