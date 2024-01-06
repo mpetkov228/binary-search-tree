@@ -238,13 +238,48 @@ function prettyPrint(node, prefix = "", isLeft = true) {
     }
 }
 
-let tree = new Tree([1, 2, 3, 7, 9, 11, 13, 15]);
+function generateRandomNumber() {
+    return Math.floor(Math.random() * 100);
+}
 
-prettyPrint(tree.root);
-console.log(tree.isBalanced());
-tree.insert(16);
-prettyPrint(tree.root);
-console.log(tree.isBalanced());
-tree.rebalance();
-prettyPrint(tree.root);
-console.log(tree.isBalanced());
+function generateArray() {
+    let arr = [];
+
+    for (let i = 0; i < 10; i++) {
+        let num = generateRandomNumber();
+        if (arr.includes(num)) {
+            continue;
+        } else {
+            arr.push(num);
+        }
+    }
+
+    return arr.sort((a, b) => a - b);
+}
+
+function main() {
+    let array = generateArray();
+    let tree = new Tree(array);
+    prettyPrint(tree.root);
+    console.log(`Is the tree balanced: ${tree.isBalanced() ? "yes" : "no"}`);
+    console.log(tree.levelOrder());
+    console.log(tree.preOrder());
+    console.log(tree.inOrder());
+    console.log(tree.postOrder());
+    tree.insert(105);
+    tree.insert(131);
+    tree.insert(142);
+    tree.insert(155);
+    tree.insert(181);
+    prettyPrint(tree.root);
+    console.log(`Is the tree balanced: ${tree.isBalanced() ? "yes" : "no"}`);
+    tree.rebalance();
+    prettyPrint(tree.root);
+    console.log(`Is the tree balanced: ${tree.isBalanced() ? "yes" : "no"}`);
+    console.log(tree.levelOrder());
+    console.log(tree.preOrder());
+    console.log(tree.inOrder());
+    console.log(tree.postOrder());
+}
+
+main();
